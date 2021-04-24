@@ -11,7 +11,7 @@ public class PositionMapper {
         return Position.builder()
                 .id(positionDto.getId())
                 .equity(positionDto.getEquity())
-                .currency(positionDto.getCurrency())
+                .broker(positionDto.getBroker())
                 .amount(positionDto.getAmount())
                 .initialCost(positionDto.getInitialCost())
                 .build();
@@ -21,8 +21,8 @@ public class PositionMapper {
         return PositionDto.builder()
                 .id(position.getId())
                 .equity(position.getEquity())
+                .broker(position.getBroker())
                 .status(position.getStatus())
-                .currency(position.getCurrency())
                 .amount(position.getAmount())
                 .initialCost(position.getInitialCost())
                 .currentCost(position.getCurrentCost())

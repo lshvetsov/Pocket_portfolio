@@ -17,7 +17,6 @@ public class PortfolioMapper {
         portfolio.setId(portfolioDto.getId());
         portfolio.setName(portfolioDto.getName());
         portfolio.setHorizon(portfolioDto.getHorizon());
-        portfolio.setBroker(portfolioDto.getBroker());
         portfolio.setStatus(portfolioDto.getStatus());
         portfolio.setPositions(portfolioDto.getPositions());
         return portfolio;
@@ -29,7 +28,6 @@ public class PortfolioMapper {
         portfolioDto.setId(portfolio.getId());
         portfolioDto.setName(portfolio.getName());
         portfolioDto.setHorizon(portfolio.getHorizon());
-        portfolioDto.setBroker(portfolio.getBroker());
         portfolioDto.setStatus(portfolio.getStatus());
         portfolioDto.setPositions(portfolio.getPositions());
         portfolioDto.setInitialCost(

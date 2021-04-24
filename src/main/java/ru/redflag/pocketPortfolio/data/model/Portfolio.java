@@ -4,6 +4,7 @@ package ru.redflag.pocketPortfolio.data.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.Broker;
 import ru.redflag.pocketPortfolio.data.enums.Status;
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Portfolio {
 
@@ -25,8 +27,6 @@ public class Portfolio {
 
     private String name;
     private LocalDate horizon;
-    @Enumerated(EnumType.STRING)
-    private Broker broker;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
@@ -34,8 +34,7 @@ public class Portfolio {
 
     @OneToMany(mappedBy = "portfolio")
     private List<Position> positions = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolio")
+    private List<Operation> operations = new ArrayList<>();
 
-    public Portfolio() {
-
-    }
 }

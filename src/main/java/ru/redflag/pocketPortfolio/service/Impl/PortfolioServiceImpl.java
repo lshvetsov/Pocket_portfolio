@@ -28,7 +28,6 @@ public class PortfolioServiceImpl implements PortfolioService {
         Portfolio portfolio = portfolioRepository.save(Portfolio.builder()
                 .name(name)
                 .horizon(horizon)
-                .broker(broker)
                 .build());
         return portfolioMapper.toPortfolioDto(portfolio);
     }

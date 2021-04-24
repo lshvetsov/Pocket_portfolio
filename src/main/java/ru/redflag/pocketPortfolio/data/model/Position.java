@@ -1,18 +1,24 @@
 package ru.redflag.pocketPortfolio.data.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.Broker;
-import ru.redflag.pocketPortfolio.data.enums.Currency;
 import ru.redflag.pocketPortfolio.data.enums.Status;
 import javax.persistence.*;
 
+/***
+ * Уровень брокера
+ */
+
+
 @Entity
 @Data
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Position {
 
     @Id
@@ -31,7 +37,7 @@ public class Position {
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
     @Enumerated(EnumType.STRING)
-    private Currency currency;
+    private Broker broker;
 
     private Integer amount = 0;
     private Double initialCost;
