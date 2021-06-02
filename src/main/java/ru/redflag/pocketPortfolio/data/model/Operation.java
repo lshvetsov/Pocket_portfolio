@@ -25,8 +25,8 @@ public class Operation {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "equity_id")
-    private Equity equity;
+    @JoinColumn(name = "position_id")
+    private Position position;
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
@@ -40,8 +40,10 @@ public class Operation {
     private Currency currency;
 
     private LocalDate date;
+
     private Long amount = 0L;
-    private Double price;
-    private Double fee;
+    private Double pricePerUnit = 0.0;
+    private Double totalPrice = 0.0;
+    private Double totalFee = 0.0;
 
 }

@@ -2,6 +2,7 @@ package ru.redflag.pocketPortfolio.controller.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.redflag.pocketPortfolio.data.dto.OperationCreateDto;
 import ru.redflag.pocketPortfolio.data.dto.OperationDto;
 import ru.redflag.pocketPortfolio.data.enums.Status;
 import ru.redflag.pocketPortfolio.service.OperationService;
@@ -17,10 +18,11 @@ public class OperationController {
     private OperationService operationService;
 
     @PostMapping
-    public OperationDto addOperation (@RequestParam String portfolioId, @RequestBody OperationDto operationDto) {
+    public OperationDto addOperation (@RequestParam String portfolioId, @RequestBody OperationCreateDto operationDto) {
         return operationService.addOperation(portfolioId, operationDto);
     }
 
+    //TODO
     @PostMapping("/dividend")
     public OperationDto addDividend (@RequestParam String portfolioId, @RequestBody OperationDto operationDto) {
         return null;

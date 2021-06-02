@@ -7,23 +7,14 @@ import ru.redflag.pocketPortfolio.data.model.Equity;
 @Component
 public class EquityMapper {
 
-    Equity toEquity (EquityDto equityDto) {
-        return Equity.builder()
-                .id(equityDto.getId())
-                .country(equityDto.getCountry())
-                .equityArea(equityDto.getEquityArea())
-                .currency(equityDto.getCurrency())
-                .currentPrice(equityDto.getCurrentPrice())
-                .build();
-    }
-
     EquityDto toEquityDto (Equity equity) {
         return EquityDto.builder()
                 .id(equity.getId())
+                .stockExchange(equity.getStockExchange())
+                .ticker(equity.getTicker())
                 .country(equity.getCountry())
                 .equityArea(equity.getEquityArea())
-                .currency(equity.getCurrency())
-                .currentPrice(equity.getCurrentPrice())
+                .equityCurrency(equity.getEquityCurrency())
                 .build();
     }
 

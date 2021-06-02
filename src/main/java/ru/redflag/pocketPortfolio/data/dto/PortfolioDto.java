@@ -1,7 +1,6 @@
 package ru.redflag.pocketPortfolio.data.dto;
 
 import lombok.*;
-import ru.redflag.pocketPortfolio.data.enums.Broker;
 import ru.redflag.pocketPortfolio.data.enums.Status;
 import ru.redflag.pocketPortfolio.data.model.Position;
 import java.time.LocalDate;

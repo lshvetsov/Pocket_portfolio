@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.Broker;
 import ru.redflag.pocketPortfolio.data.enums.Status;
 import javax.persistence.*;
+import java.util.List;
 
 /***
  * Уровень брокера
@@ -35,12 +36,18 @@ public class Position {
     private Portfolio portfolio;
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.ACTIVE;
-    @Enumerated(EnumType.STRING)
     private Broker broker;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ACTIVE;
 
     private Integer amount = 0;
-    private Double initialCost;
+    private Double initialCost = 0.0;
+    private Double initialCostPerUnit = 0.0;
     private Double currentCost = 0.0;
+
+    @OneToMany(mappedBy = "position")
+    private List<Operation> operations;
+    @OneToMany(mappedBy = "position")
+    private List<Dividend> dividends;
 
 }
