@@ -40,7 +40,7 @@ public class Position {
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
 
-    private Integer amount = 0;
+    private Long amount = 0L;
     private Double initialCost = 0.0;
     private Double initialCostPerUnit = 0.0;
     private Double currentCost = 0.0;
