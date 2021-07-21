@@ -1,10 +1,7 @@
 package ru.redflag.pocketPortfolio.data.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.Broker;
 import ru.redflag.pocketPortfolio.data.enums.Status;
@@ -33,8 +30,10 @@ public class Portfolio {
     private Status status = Status.ACTIVE;
 
     @OneToMany(mappedBy = "portfolio")
+    @ToString.Exclude
     private List<Position> positions = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
+    @ToString.Exclude
     private List<Operation> operations = new ArrayList<>();
 
 }

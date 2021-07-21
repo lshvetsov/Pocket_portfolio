@@ -1,0 +1,66 @@
+version: "2.4"
+
+services:
+
+  postgres_db:
+    image: postgres:11.7-alpine
+    container_name: postgres_db
+    command: -p 5433
+    restart: always
+    environment:
+    - POSTGRES_DB=portfolio
+    - POSTGRES_PASSWORD=portfolio
+    - POSTGRES_USER=portfolio
+    - TZ=Europe/Moscow
+    volumes:
+      - ./src/main/resources/pg_init.sql:/docker-entrypoint-initdb.d/pg_init.sql
+    healthcheck:
+      test: "pg_isready -U postgres"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - 5433:5433
+
+    #https://hub.docker.com/r/liquibase/liquibase
+#  liquibase:
+#    image: liquibase/liquibase:4.3.5
+#    container_name: liquibase
+#    command: ["--url=jdbc:postgresql://sbpr-db:5432/db?currentSchema=profile",
+#            "--driver=org.postgresql.Driver","--changeLogFile=/single/changelog.yml",
+#            "--username=postgres","--password=postgres","update"]
+#    volumes:
+#      - !!!CHANGE ./sbpr-core-migration/liquibase/:/liquibase/changelog/
+#    environment:
+#      - TZ=Europe/Moscow
+#    depends_on:
+#      postgres-db:
+#        condition: service_healthy
+  portfolio:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: portfolio
+    ports:
+      - 8085:8080
+    environment:
+      POSTGRES_DB_URL: "jdbc:postgresql://postgres_db:5433/portfolio?currentSchema=public"
+      POSTGRES_DB_USERNAME: "portfolio"
+      POSTGRES_DB_PASSWORD: "portfolio"
+#      SBPR_CORE_SSL_ENABLED: "true"
+#      SBPR_CORE_SSL_KEY_STORE_PATH: "classpath:key-store.jks"
+#      SBPR_CORE_SSL_KEY_PASSWORD: "secret"
+#      SBPR_CORE_SSL_KEYSTORE_PASSWORD: "secret"
+    healthcheck:
+      test: "curl -sS http://0.0.0.0:8080"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - postgres_db
+#      - liquibase
+
+networks:
+  default:
+    name: sberprofile
+    driver: bridge

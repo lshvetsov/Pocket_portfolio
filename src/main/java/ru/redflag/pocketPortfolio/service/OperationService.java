@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface OperationService {
 
-    public OperationDto addOperation (String portfolioId, OperationCreateDto operationDto);
-    public OperationDto updateOperationStatus (String operationId, Status status);
-    public OperationDto updateOperation (String operationId, OperationDto operationDto);
-    public List<OperationDto> getAllOperations();
-    public OperationDto getOperation (String id);
+    OperationDto addOperation (String portfolioId, OperationCreateDto operationDto);
+    OperationDto updateOperationStatus (String operationId, Status status);
+    OperationDto updateOperation (String operationId, OperationDto operationDto);
+    List<OperationDto> getAllOperations();
+    OperationDto getOperation(String id);
+    List<OperationDto> getOperationByPortfolio (String portfolioId);
 
-    public List<OperationDto> searchByParameters ();
-    public List<OperationDto> searchByDates (LocalDate from, LocalDate to);
+    List<OperationDto> searchByDates (String portfolioId, LocalDate from, LocalDate to);
 
 
 }

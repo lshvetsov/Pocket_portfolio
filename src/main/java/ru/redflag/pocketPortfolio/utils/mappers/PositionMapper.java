@@ -1,4 +1,4 @@
-package ru.redflag.pocketPortfolio.utils;
+package ru.redflag.pocketPortfolio.utils.mappers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,6 @@ public class PositionMapper {
                 .broker(position.getBroker())
                 .status(position.getStatus())
                 .amount(position.getAmount())
-                .initialCost(position.getInitialCost())
-                .initialCostPerUnit(position.getInitialCostPerUnit())
                 .currentCost(position.getCurrentCost())
                 .build();
     }

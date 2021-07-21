@@ -1,9 +1,6 @@
 package ru.redflag.pocketPortfolio.data.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.Currency;
 import ru.redflag.pocketPortfolio.data.enums.OperationType;
@@ -26,10 +23,12 @@ public class Operation {
 
     @ManyToOne
     @JoinColumn(name = "position_id")
+    @ToString.Exclude
     private Position position;
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
+    @ToString.Exclude
     private Portfolio portfolio;
 
     @Enumerated(EnumType.STRING)
@@ -39,11 +38,16 @@ public class Operation {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
+    @Basic
     private LocalDate date;
 
+    @Builder.Default
     private Long amount = 0L;
+    @Builder.Default
     private Double pricePerUnit = 0.0;
+    @Builder.Default
     private Double totalPrice = 0.0;
+    @Builder.Default
     private Double totalFee = 0.0;
 
 }

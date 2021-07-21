@@ -1,4 +1,4 @@
-package ru.redflag.pocketPortfolio.utils;
+package ru.redflag.pocketPortfolio.utils.mappers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,10 @@ import ru.redflag.pocketPortfolio.data.dto.OperationCreateDto;
 import ru.redflag.pocketPortfolio.data.dto.OperationDto;
 import ru.redflag.pocketPortfolio.data.dto.PositionOperationDto;
 import ru.redflag.pocketPortfolio.data.model.Operation;
-import ru.redflag.pocketPortfolio.repositories.PositionRepository;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 
 @Component
 public class OperationMapper {
@@ -22,7 +25,7 @@ public class OperationMapper {
                 .date(operationDto.getDate())
                 .amount(operationDto.getAmount())
                 .pricePerUnit(operationDto.getPricePerUnit())
-                .totalPrice(operationDto.getTotalPrice())
+                .totalPrice(operationDto.getTotalPrice().doubleValue())
                 .totalFee(operationDto.getTotalFee())
                 .build();
     }
@@ -43,6 +46,7 @@ public class OperationMapper {
     public OperationDto toOperationDto (Operation operation) {
         return OperationDto.builder()
                 .id(operation.getId())
+                .date(operation.getDate())
                 .portfolioName(operation.getPortfolio().getName())
                 .position(PositionOperationDto.builder()
                         .id(operation.getPosition().getId())
@@ -56,10 +60,9 @@ public class OperationMapper {
                 .currency(operation.getCurrency())
                 .amount(operation.getAmount())
                 .pricePerUnit(operation.getPricePerUnit())
-                .totalPrice(operation.getTotalPrice())
+                .totalPrice(BigDecimal.valueOf(operation.getTotalPrice()).setScale(3, RoundingMode.CEILING))
                 .totalFee(operation.getTotalFee())
                 .build();
     }
-
 
 }

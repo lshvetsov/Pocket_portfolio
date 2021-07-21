@@ -20,6 +20,8 @@
         <spring-boot.version>2.4.5</spring-boot.version>
         <spring-doc.version>1.5.6</spring-doc.version>
         <h2.version>1.4.200</h2.version>
+        <postgresql.version>42.2.10</postgresql.version>
+        <jetbrains-annotations.version>21.0.1</jetbrains-annotations.version>
     </properties>
 
     <dependencies>
@@ -59,6 +61,17 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains-annotations.version}</version>
             <scope>compile</scope>
         </dependency>
 

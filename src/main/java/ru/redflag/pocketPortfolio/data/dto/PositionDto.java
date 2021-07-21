@@ -13,9 +13,7 @@ public class PositionDto {
     private EquityDto equity;
     private Broker broker;
     private Status status;
-    private Integer amount;
-    private Double initialCost;
-    private Double initialCostPerUnit;
+    private Long amount;
     private Double currentCost;
 
 }

@@ -3,6 +3,8 @@ package ru.redflag.pocketPortfolio.data.dto;
 import lombok.*;
 import ru.redflag.pocketPortfolio.data.enums.Status;
 import ru.redflag.pocketPortfolio.data.model.Position;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +19,6 @@ public class PortfolioDto {
     private Double currentCost;
     private Long equityAmount;
     private Long positionAmount;
-    private List<Position> positions;
+    private List<PositionDto> positions;
 
 }

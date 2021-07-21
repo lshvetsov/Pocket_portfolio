@@ -1,0 +1,107 @@
+### Add a portfolio
+POST http://{{host}}:{{port}}/api/v1/portfolio?name=Portfolio&horizon=2022-04-13&broker=SBER
+Content-Type: application/json
+
+> {% var portfolioId = client.global.get("portfolioId");
+    portfolioId = JSON.parse(JSON.stringify(response.body)).id;
+    client.log("portfolioid is" + portfolioId);
+    client.global.set("portfolioId", portfolioId);
+%}
+
+### Add an operation with a new position and equity
+
+POST http://{{host}}:{{port}}/api/v1/operation?portfolioId={{portfolioId}}
+Content-Type: application/json
+
+{
+  "position": {
+    "equity": {
+      "stockExchange": "Moscow",
+      "ticker": "GAZP",
+      "equityArea": "OIL_AND_GAS",
+      "equityCurrency": "RUB",
+      "equityType": "SHARE",
+      "country": "RUSSIA"
+    },
+    "broker": "SBER"
+  },
+  "operationType": "BUY",
+  "operationStatus": "ACTIVE",
+  "currency": "RUB",
+  "date": "2021-06-06",
+  "amount": 10,
+  "pricePerUnit": 200.5,
+  "totalFee": 0.5
+}
+
+> {% var positionId = client.global.get("positionId");
+    var jsonResponse = JSON.parse(JSON.stringify(response.body));
+    positionId = jsonResponse.position.id
+    client.log("positionId is" + positionId);
+    client.global.set("positionId", positionId);
+%}
+
+### Add an operation
+
+POST http://{{host}}:{{port}}/api/v1/operation?portfolioId={{portfolioId}}
+Content-Type: application/json
+
+{
+  "position": {
+    "id": "{{positionId}}",
+    "equity": {
+      "stockExchange": "Moscow",
+      "ticker": "GAZP",
+      "equityArea": "OIL_AND_GAS",
+      "equityCurrency": "RUB",
+      "equityType": "SHARE",
+      "country": "RUSSIA"
+    },
+    "broker": "SBER"
+  },
+  "operationType": "BUY",
+  "operationStatus": "ACTIVE",
+  "currency": "RUB",
+  "date": "2021-06-10",
+  "amount": 10,
+  "pricePerUnit": 199.5,
+  "totalFee": 0.5
+}
+
+### Get information about the portfolio
+GET http://{{host}}:{{port}}/api/v1/portfolio/{{portfolioId}}
+Content-Type: application/json
+
+### Get the list of operations of the portfolio
+
+GET http://{{host}}:{{port}}/api/v1/operation/searchByDates?portfolioId={{portfolioId}}&from=2021-06-01
+Content-Type: application/json
+
+### Add a dividend
+
+POST http://{{host}}:{{port}}/api/v1/operation/dividend
+Content-Type: application/json
+
+{
+  "position": {
+    "id": "{{positionId}}"
+  },
+  "operationType": "DIVIDEND",
+  "operationStatus": "FUTURE",
+  "currency": "RUB",
+  "date": "2021-06-22",
+  "amount": 10,
+  "pricePerUnit": 10.5,
+  "totalFee": 1.5
+}
+
+> {% var operationId = client.global.get("operationId");
+    operationId = JSON.parse(JSON.stringify(response.body)).id;
+    client.log("operationId is" + operationId);
+    client.global.set("operationId", operationId);
+%}
+
+### Confirm the dividend
+
+PUT http://{{host}}:{{port}}/api/v1/operation?operationId={{operationId}}&status=ACTIVE
+Content-Type: application/json

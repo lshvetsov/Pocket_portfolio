@@ -1,0 +1,39 @@
+###
+POST http://{{host}}:{{port}}/api/v1/portfolio?name=Portfolio&horizon=2022-04-13&broker=SBER
+Content-Type: application/json
+
+> {% var portfolioId = client.global.get("portfolioId");
+    portfolioId = JSON.parse(JSON.stringify(response.body)).id;
+    client.log("portfolioid is" + portfolioId);
+    client.global.set("portfolioId", portfolioId);
+%}
+
+<> 2021-04-13T204436.200.json
+
+###
+GET http://{{host}}:{{port}}/api/v1/portfolio
+Content-Type: application/json
+
+<> 2021-04-13T201836.200.json
+
+###
+GET http://{{host}}:{{port}}/api/v1/portfolio/{{portfolioId}}
+Content-Type: application/json
+
+<> 2021-04-13T204520.200.json
+
+###
+PUT http://{{host}}:{{port}}/api/v1/portfolio/{{portfolioId}}/status
+Content-Type: application/json
+
+<> 2021-04-13T202218.500.json
+
+###
+PUT http://{{host}}:{{port}}/api/v1/portfolio/{{portfolioId}}?name=Portfolio1
+Content-Type: application/json
+
+###
+DELETE http://{{host}}:{{port}}/api/v1/portfolio/{{portfolioId}}
+Content-Type: application/json
+
+<> 2021-04-13T204407.500.json

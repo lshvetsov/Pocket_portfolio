@@ -1,9 +1,6 @@
 package ru.redflag.pocketPortfolio.data.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import ru.redflag.pocketPortfolio.data.enums.*;
 
@@ -38,9 +35,11 @@ public class Equity {
     @Enumerated(EnumType.STRING)
     private Currency equityCurrency;
 
+    @Builder.Default
     private Double currentCostPerUnit = 0.0;  //TODO Implement the process of an automatic update of the equity cost
 
     @OneToMany(mappedBy = "equity")
+    @ToString.Exclude
     private List<Position> includedPositions;
 
 }
