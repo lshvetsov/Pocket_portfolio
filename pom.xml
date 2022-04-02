@@ -19,8 +19,8 @@
         <java.version>11</java.version>
         <spring-boot.version>2.4.5</spring-boot.version>
         <spring-doc.version>1.5.6</spring-doc.version>
-        <h2.version>1.4.200</h2.version>
-        <postgresql.version>42.2.10</postgresql.version>
+        <h2.version>2.0.210</h2.version>
+        <postgresql.version>42.3.3</postgresql.version>
         <jetbrains-annotations.version>21.0.1</jetbrains-annotations.version>
     </properties>
 
