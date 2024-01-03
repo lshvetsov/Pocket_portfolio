@@ -1,3 +1,3 @@
-Small application for keeping all assets together and updating their prices. 
+Application for keeping the track of prices of assets in portfolios
 
 Undone
